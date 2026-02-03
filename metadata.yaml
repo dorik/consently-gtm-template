@@ -1,0 +1,12 @@
+homepage: "https://consently.net"
+documentation: "https://help.consently.net/gtm-template"
+versions:
+  - sha: REPLACE_WITH_COMMIT_SHA
+    changeNotes: |
+      Initial release (v1.0.0)
+
+      - Google Consent Mode v2 with all 7 consent signals
+      - IAB TCF 2.2 support via gtag_enable_tcf_support
+      - Region-specific default consent
+      - URL passthrough for conversion tracking
+      - Ads data redaction when consent denied
