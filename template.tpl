@@ -113,6 +113,7 @@ const updateConsentState = require('updateConsentState');
 const gtagSet = require('gtagSet');
 const injectScript = require('injectScript');
 const setInWindow = require('setInWindow');
+const copyFromWindow = require('copyFromWindow');
 const log = require('logToConsole');
 const makeNumber = require('makeNumber');
 const makeString = require('makeString');
@@ -144,7 +145,32 @@ const debugLog = function(message, obj) {
   }
 };
 
-debugLog('Initializing...', { clientId: clientId, defaultConsent: defaultConsent });
+debugLog('Initializing...');
+
+// ============================================
+// LOAD ORDER DETECTION
+// Checks if Google tags fired before consent was set
+// ============================================
+const checkLoadOrder = function() {
+  const dataLayer = copyFromWindow('dataLayer');
+  if (!dataLayer || !dataLayer.length) {
+    return;
+  }
+
+  // Check for gtag config before this template ran
+  for (var i = 0; i < dataLayer.length; i++) {
+    var item = dataLayer[i];
+    if (item && item[0] === 'config') {
+      log('[Consently CMP] WARNING: Google tag config detected before consent initialization. Ensure this tag uses the "Consent Initialization - All Pages" trigger.');
+      return;
+    }
+  }
+};
+
+// Run load order check in debug mode
+if (DEBUG) {
+  checkLoadOrder();
+}
 
 // ============================================
 // STEP 1: BUILD DEFAULT CONSENT STATE
@@ -428,6 +454,21 @@ ___WEB_PERMISSIONS___
                   {"type": 8, "boolean": true},
                   {"type": 8, "boolean": true}
                 ]
+              },
+              {
+                "type": 3,
+                "mapKey": [
+                  {"type": 1, "string": "key"},
+                  {"type": 1, "string": "read"},
+                  {"type": 1, "string": "write"},
+                  {"type": 1, "string": "execute"}
+                ],
+                "mapValue": [
+                  {"type": 1, "string": "dataLayer"},
+                  {"type": 8, "boolean": true},
+                  {"type": 8, "boolean": false},
+                  {"type": 8, "boolean": false}
+                ]
               }
             ]
           }
@@ -621,6 +662,30 @@ scenarios:
 
     assertApi('updateConsentState').wasNotCalled();
 
+- name: Test load order detection reads dataLayer
+  code: |-
+    const mockData = {
+      clientId: 'test_123',
+      defaultConsent: 'denied',
+      waitForUpdate: 500
+    };
+
+    mock('getContainerVersion', function() {
+      return { debugMode: true, previewMode: false };
+    });
+
+    mock('copyFromWindow', function(key) {
+      if (key === 'dataLayer') {
+        return [['config', 'G-XXXXXX']];
+      }
+      return undefined;
+    });
+
+    runCode(mockData);
+
+    assertApi('copyFromWindow').wasCalledWith('dataLayer');
+    assertApi('logToConsole').wasCalled();
+
 
 ___NOTES___
 
@@ -630,7 +695,7 @@ CONSENTLY CMP - GOOGLE TAG MANAGER TEMPLATE
 
 Version: 1.0.0
 Author: Consently (https://consently.net)
-Documentation: https://help.consently.net/google-consent-mode
+Documentation: https://help.consently.net/gtm-template
 Script URL: https://app.consently.net/consently.js?id={CLIENT_ID}
 
 TRIGGER: Must use "Consent Initialization - All Pages"
@@ -645,6 +710,11 @@ CALLBACK FORMAT (from CMP):
 }
 
 TCF 2.2: When enabled, Google auto-infers ad consent from TC String.
-analytics_storage is still sent separately.
+analytics_storage must still be sent separately.
+
+DEBUG MODE:
+- Automatically enabled in GTM Preview mode
+- Logs consent initialization and updates to console
+- Detects load order issues (warns if Google tags fired before consent)
 
 ================================================================================
