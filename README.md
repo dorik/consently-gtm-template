@@ -35,7 +35,7 @@ This tag **must** use the **Consent Initialization - All Pages** trigger to ensu
 ## Support
 
 - [Help Center](https://help.consently.net)
-- [GitHub Issues](https://github.com/nicholasoxford/consently-gtm-template/issues)
+- [GitHub Issues](https://github.com/dorik/consently-gtm-template/issues)
 
 ## License
 

@@ -1,7 +1,7 @@
 homepage: "https://consently.net"
 documentation: "https://help.consently.net/gtm-template"
 versions:
-  - sha: REPLACE_WITH_COMMIT_SHA
+  - sha: 8c475d0f351973d4110d878ce0816c20234cf6c7
     changeNotes: |
       Initial release (v1.0.0)
 
