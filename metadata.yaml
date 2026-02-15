@@ -15,7 +15,7 @@
 homepage: 'https://consently.net'
 documentation: 'https://help.consently.net/gtm-template'
 versions:
-  - sha: 7433b23b84e4f634f03b91bfa0f05a462302d1d2
+  - sha: 141e69f35825576005c76ece2a119aaefd4431c0
     changeNotes: |
       Initial release (v1.0.0)
 
