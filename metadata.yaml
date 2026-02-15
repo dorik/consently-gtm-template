@@ -1,7 +1,7 @@
-homepage: "https://consently.net"
-documentation: "https://help.consently.net/gtm-template"
+homepage: 'https://consently.net'
+documentation: 'https://help.consently.net/gtm-template'
 versions:
-  - sha: 8c475d0f351973d4110d878ce0816c20234cf6c7
+  - sha: 7433b23b84e4f634f03b91bfa0f05a462302d1d2
     changeNotes: |
       Initial release (v1.0.0)
 
