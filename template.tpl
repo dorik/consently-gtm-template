@@ -22,7 +22,7 @@ ___INFO___
   "brand": {
     "id": "brand_consently",
     "displayName": "Consently",
-    "thumbnail": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAB8ElEQVR4nO2WT0tCQRTFf2ZFRRRt2rRo06ZNmzZt+gRt2vQJ2rTpE7Rp0ydoU5s2bWrTIoiCoCCKiMg/0UKLiHDkDjzm+d68N08Lov7wwMy8e8+Zd+fODPznPysBzANbwD7wCFwBR8AqMA3EgkzgGfYEMAscAjfAI9AGnIFT4BhYBCaBQaAP6AL+CjsWOAwsA2dALXAFHAPrQBOQD+QBWUAW0A50Al3ANDABjAPDwBCQAaQBv4WZYhHfBJaBQ+AUOAfugBagHqgDaoFqoAqoBMqBUqAEKAaKgEKgAMgH8oA8IJffIDdaBXAA7ANHwDFwCtwAjUAT0Aw0AQ1APVAHVAOVQAVQDpQBpUAJUAwUAYVAAZAP5AF5QB4/IbcH7AKHwBFwApwBl0AD0AS0AK1AK9AENVANZYCVQAVUAWVAKVAOFAMFQD6QCxggF8gBsoEsIBNIBzKAdOBXkBMYAnaBfeAQOAJOgAvgEqgHGoAmoBloBpqgBmqgBiqgHCqhDEqhBEqgGIqgEAqgAMgDcoFcfkJuN9gBdoAD4BA4BE6AM+ACuATqgQagCWgGWoAWqIEaqIJyqIByKIUSKIFiKIJCKIB8yAdygVx+Qm432AZ2gAPgEDgCToBz4BK4AuqBRqAZaIFWaIU6qINKqIByKIdSKIFiKIJCKIB8yIfuBMkAAAAASUVORK5CYII="
+    "thumbnail": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAxFSURBVHgBxVp7cFTlFf9999597+YdAuEVQeQhUJ5atQgUtda2WnRAoINSH5WKVto6tfWBnbFqZxg7zoCjIvWPVisQae04LQ9FkUEHHxQMAgGJIYGEkOdm2Ud27+Pr+b57A0uySTYExgOb3b2P7zvnfOf8zu98dxkyi0ovMzR0fqE+csbDasn3bueuIaMVxv26wkH/L6kwhUURqz/GT+/ZkKjd9lfU72zu1KnbtRm+s8DExcXatNV7TE9hGaJNHFxnUAyYnIOR8pdYf6kGY6SKolksNEhR2+r2R/beNRvHPo3RSQtpKqQboIiTgdu2/R5D5zxvtR6zyBXS2SrdYtKADN+WmJZSdLmCqg/vjm25+W+duooznTqJd56z9OCbSVawGGY7V01OyttKmwojI2yjL733MwtjimX58xXtzKk/RTdNfqpTZ9U5r/jm73jM8oxcqaTaGeOcpS+Owr89xc8JZ0xPcBYsna3ljz9qVL9zSB6kP6p/+I0l+Mm/68xwjUXhItIUA1dZ3M+6qACZQwMRyg1LKRylRMt/FMTp7Qk5Q+7d1UdTHYlRdFLlA4x0kXumxWB10LtuUf5btuZeFZqbvOUWZgkr7AC9EHtMxg2vHv0s8vbM6zR/0XWlprtoDE+exIWmqUAMUweSp2PIK9QwZ2YQs6b7MHWIhrygFwataFM4hj1HTGz9LIy9+zvAXT54ijRabqPfRpArNKNk0rUomRxg7muf/6NrxIJVHDrjwn39GE0obiQ5rKY4fn1fMR67YxAKA255zoKIRUVGke1vyiWBG4p97/+ORbB87Ul8/oWBwEgfLMvKfmIajatejkOv38cC83ceYJ7iiZzy2VBtyMzGBkVVEDsWxpO/GYxnFg4FJ2Up+emECbvmnI9a0oC0z3YIqagPd+DG3x3B0RoNvgI3VSoyPYtcEbiiRA68z/yLKqOidkmrkK0DGFztUdRu/g5yfIpURelX9J1LcOF4hSx76+MWLHm0BsHRQZhmdpowI1ZPlYoFLGaBZ5kBPMVweW4S7VumIUCJSZjbT+U7DbBFcZZl4TX5qHl3HKJVUaiqmt0w7pwg8y4+TBUrOzTgtLZjQilUrJ8Igwqb1kVz7gwiUimWNFDV0IHGtiQZyDBkkB9XlGhQFa3H8S0aM9KhI//2w/Dl+9BXMFMORjQmSwHr82JNJaRpiaFi41QYhkU4wLpMbntz/ft1eOK1FjTWExPxamAugZsU1x0CVy1MnuTGKw8NwzVj8+grh0rGiZgXC2GQCnl+FzRmSI36zAU6x3yLKvt0vvBo/HgMTVsnII9Qholkd1JSeF2c33WwDfN++Q1QWAi3j6BRKCHqARMEUKhjX6/Sv3hDHFdcBhxYP56OqtJwwVTEgk646yucMAl6LbPPckpBH1GQhZgpYMV9BJEhr1yJTuUtR/kHX6rC7IdPwjs8BK+ngxQ2wZ2wtJU/OxId1+Ee4kJN0gXXdytQWR+XWgrl73+lCt9EfPa4yBIN+7pAKCgK1Np7htGAFs7jSPRxyQuVWP+uBX+pCk7okSIDJdx3nZ1WRExnKPY5hbRUqMgdqI3KIT842IL1/0gSryHPMx3ZSp8GGDTjiqVFMlTSc1bEfPmnLSjfqkMrIBQzNRmzqlOPunmP2wEhiSFdl2rjePz+AKHPICQMA/OWVSNnmFsgBYVPVoEhpY8cYEicOoNT70xESa5LUFrIGkvKKCK2Z+6Df1whuJEA+kFDrLiKW2eZ2PToWPk9/+YK8OIgdE4Uw1TtpimL4frMARHFhYUqBud5HOWFKHLZVr5eC3dZDk0Ys4eiWU1DTbsus1B6YMqI6Fnlb1l1CIlQDlJGklLExn+evS96DyGDRrrpqhxksAyvljdCc5E2XGA7R7zOwAM/VJFoSsDN0qn0uQVWabxiFseeNVOgExRv/KQB2z+mK71xCi2VWCb6Lb0awBMW5l6d3+14bVscHVGBFsLzFqJ1FrasKcWLy8qgb5+IBCU9E1ibnvBE1FNNYdRSHYkbJlpjKSx6pAmewYRppguCDVzIZkGvBugpC9OHddsIQGWNATUkKipx2CTDsytDuOnKfMJzm3omd0wDa2mRFZhTSHkUQfwMxN+bibiegl9TMXz+PgTH+W0sztD8XBQDkDKREwh0O1zXTHHvsdmT5mFYVx4mDzOJTCopaxCcRrddBR8RPhfBV/hYFI0fjCYk4/BTZZ618hDUQQWUM6bkYJxfeJvWR8aRQhl4leRAsj+0JGKcTrox9w+VsqKKBkwjqm0SbWj6z1SMC8VxYPM4FHh9du5sr8enRyhv6EY7WQfWAfaOQi4N7fFkt+PDBwfAiXSJHoALI9wcnxzWcdOqr+FS7BqhkhEGffhs3VRMGOqRata36lj+VD28+ekN5cCa5N4N8Kg42qB3m2RymRdWzMkN7nAcImG7KkzMffyoXAlTrITSyZcUeeyy2ysQGpMD09nlGGiD36cBqo9j175ENwMKSNlgniWLmQgjGQv0Uv2a7Huv/lUl5QLBsNPdic9XPVABd2lI5gfv0q0JsTcD7Da1P6vSuwEEfW/vPtPtMjH8ivnFlIRuOfHZ40QDmEdBxSmGSfd+SSsAmaDP/bMeFSdUR7nuIopgos3EXXN9VE/OUGW3G6UBGyC8evq4jkjCwHlAQZ+fXjoUyaomnF947dhghLDHogGU3nkIT2yowZNromD5Wo/pauoaFtzgwroHhoN/NA0/m6MgXp2SMDwgA0S36x3ix4vvnDrvuBjXSw3NmueGQW/J7ClGzX07xc4Lm034SkWRytxzuwjRWGszNv52jKTgFjHC1x4chehH4zE015TFsncdexHZqxHOP7OuQS4p7xK0D/2gFNdcGaduK3PrIRTS3IRWxC45VzIqH6mKoHXbTFi66Ogsmewi1LyE34/cVgQrZV24AZYwgaBQLQjh8Tcauhknetidq6djzoQU0WM3JWsGMsc7k5Kn2U6fiaan6toQ2zWFDCGUcp27xXRgeMUzNXB7B7ACneLyAM+vrUdbLEkocs4jgjoIpNn67JXY8FQI0dpWmHGGngipIpCfViNe1YEfzwQSO6+Gh2iFerbRcCCZ3uY9WQnPyFz0VaSz6omFiFZSb4gg8f4MuW+jqunwA4ntgpW+uvU0Vm9oRlUt9aGiMdGcokBlI6cQuPOWEFYvGYEcglzR1IuqnTaMLIKb9zRi8dPN8BZrvdIM0Q9kbYB9h4Ziqw01G2ZIPNccIzqLkgwUZ4dBPM1pDidBpJNoN0NRQIOfCqO4SG47Zlgmk4zcXx3FjHsqERyRJ43h3OxZHSYNOMyz5yNcto5FvB0nyqdTv0BGsGzv7WVUx4W7vw7j+mXHEbosIHclHDV7vI8oe4SgVomyrJWgRVMNNLvzoF6/F7WNNk/KtC9rZai2mcSybFh+uvwkrv95PYKX+Wk3W4eDgb3ey5Nt1FLG679Gv8o3GUHeCYwIYfT8Q7h7bTXEkzThxfRwVZzJe1LBeWKFk80dGLywAn/+eyv8ZXZewMpma5HmjFV/qfDGvZvsifsRCsR/iMrDNzIHG3cnwWbtxYMv1+J0e0dWt4uStrsyjIm/OIyyBUcQ9fjgoj2nfhFTzW+xxn1vMpT9NC9w81ttVrgGFyqCGBtUQVN1KeSXpDBvRgizpuViynAVfiJ+FnGbhnAEXxzl2Pp5C/bto90HrxuuQq/kgmcJYdbzERnPvwKxl1W3vCu05PBXusnHUi5oA2kwhCFiKxEUYmbCBUPXbWgRZwiBVHp5aHPXpDxSKUxM8SxB7u5ZTqXObgloBS3VTHwYK592g3zIh1ELgsFb3gzz5mrKKZ79rlIvpohdPMVJRM7sB+QWs6c/6yJ+Ic4iHCwcq555STYbEoxNfFN+hh/dsszwFwiKfxHajC4P8LhzrBOwnf6hv8/kmKhquUNU/eD6G2E/BjqX7nrVhv2BMfeqVqh4NjMS52+CXhRhXd77K1TRcoco6skdy+PvLd0M50l9+mMrJbJp3Cp+Yscilj9KoUeZFmcXIZoGKExilgibMSqv2vz96H/veA1p7DDTjz0UlM1xBWf8ZYdZMv5ahBs4N1Ii0dhFX5QelXa0U92chYYztXX/1jNVy2/F3r3C6z3+2CNd5E9bSkpKAu1D71+olExaDP/lE+AOhbiTipdMeUatT7K9ncerD7CGL98oafv4X8eP7xQl387XLvJ/Ps02nMAaTCEAAAAASUVORK5CYII\u003d"
   },
   "containerContexts": [
     "WEB"
@@ -217,6 +217,7 @@ if (enableTcf) {
 // ============================================
 gtagSet('url_passthrough', true);
 gtagSet('ads_data_redaction', true);
+gtagSet('developer_id.dNjE1OT', true);
 
 // ============================================
 // STEP 5: REGISTER CONSENT CALLBACK
@@ -394,7 +395,8 @@ ___WEB_PERMISSIONS___
             "listItem": [
               {"type": 1, "string": "gtag_enable_tcf_support"},
               {"type": 1, "string": "url_passthrough"},
-              {"type": 1, "string": "ads_data_redaction"}
+              {"type": 1, "string": "ads_data_redaction"},
+              {"type": 1, "string": "developer_id.dNjE1OT"}
             ]
           }
         }
@@ -661,6 +663,18 @@ scenarios:
     capturedCallback(null);
 
     assertApi('updateConsentState').wasNotCalled();
+
+- name: Test developer_id is set
+  code: |-
+    const mockData = {
+      clientId: 'test_123',
+      defaultConsent: 'denied',
+      waitForUpdate: 500
+    };
+
+    runCode(mockData);
+
+    assertApi('gtagSet').wasCalledWith('developer_id.dNjE1OT', true);
 
 - name: Test load order detection reads dataLayer
   code: |-
