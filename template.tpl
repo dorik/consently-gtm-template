@@ -74,12 +74,69 @@ ___TEMPLATE_PARAMETERS___
     "valueHint": "e.g., DE, FR, IT"
   },
   {
+    "type": "SELECT",
+    "name": "globalFallback",
+    "displayName": "Consent for other regions",
+    "macrosInSelect": false,
+    "selectItems": [
+      {
+        "value": "granted",
+        "displayValue": "Granted (recommended)"
+      },
+      {
+        "value": "denied",
+        "displayValue": "Denied"
+      }
+    ],
+    "simpleValueType": true,
+    "defaultValue": "granted",
+    "help": "Default consent state for visitors outside the regions specified above. Use 'Granted' when listed regions require consent but others do not.",
+    "enablingConditions": [
+      {
+        "paramName": "region",
+        "paramValue": "",
+        "type": "NOT_EQUALS"
+      }
+    ]
+  },
+  {
     "type": "CHECKBOX",
     "name": "enableTcf",
     "checkboxText": "Enable IAB TCF 2.2 support",
     "simpleValueType": true,
     "defaultValue": true,
     "help": "When enabled, Google tags automatically read consent from the IAB TCF 2.2 TC String."
+  },
+  {
+    "type": "CHECKBOX",
+    "name": "urlPassthrough",
+    "checkboxText": "Enable URL passthrough",
+    "simpleValueType": true,
+    "defaultValue": false,
+    "help": "When enabled and cookie consent is denied, ad click and session IDs pass via URL parameters instead of cookies. This helps measurement continuity but adds identifiers to URLs."
+  },
+  {
+    "type": "SELECT",
+    "name": "adsDataRedaction",
+    "displayName": "Ads data redaction",
+    "macrosInSelect": false,
+    "selectItems": [
+      {
+        "value": "true",
+        "displayValue": "True (recommended)"
+      },
+      {
+        "value": "false",
+        "displayValue": "False"
+      },
+      {
+        "value": "dynamic",
+        "displayValue": "Dynamic (match ad_storage)"
+      }
+    ],
+    "simpleValueType": true,
+    "defaultValue": "true",
+    "help": "When true and ad consent is denied, ad click identifiers are redacted from network requests and routed through a cookieless domain. 'Dynamic' matches the current ad_storage consent state."
   },
   {
     "type": "TEXT",
@@ -127,6 +184,9 @@ const defaultConsent = data.defaultConsent || 'denied';
 const region = data.region || '';
 const enableTcf = data.enableTcf !== false;
 const waitForUpdate = makeNumber(data.waitForUpdate) || 500;
+const globalFallback = data.globalFallback || 'granted';
+const urlPassthrough = data.urlPassthrough === true;
+const adsDataRedaction = data.adsDataRedaction || 'true';
 
 // Check if in preview/debug mode
 const containerVersion = getContainerVersion();
@@ -205,6 +265,21 @@ if (region && region.length > 0) {
 setDefaultConsentState(defaultConsentState);
 debugLog('Default consent set');
 
+// STEP 2b: SET GLOBAL FALLBACK (for visitors outside specified regions)
+if (region && region.length > 0) {
+  setDefaultConsentState({
+    'ad_storage': globalFallback,
+    'ad_user_data': globalFallback,
+    'ad_personalization': globalFallback,
+    'analytics_storage': globalFallback,
+    'functionality_storage': 'granted',
+    'personalization_storage': globalFallback,
+    'security_storage': 'granted',
+    'wait_for_update': waitForUpdate
+  });
+  debugLog('Global fallback consent set:', globalFallback);
+}
+
 // ============================================
 // STEP 3: SET TCF SUPPORT
 // ============================================
@@ -215,8 +290,14 @@ if (enableTcf) {
 // ============================================
 // STEP 4: SET PRIVACY SAFEGUARDS
 // ============================================
-gtagSet('url_passthrough', true);
-gtagSet('ads_data_redaction', true);
+gtagSet('url_passthrough', urlPassthrough);
+
+if (adsDataRedaction === 'dynamic') {
+  gtagSet('ads_data_redaction', defaultConsent === 'denied');
+} else {
+  gtagSet('ads_data_redaction', adsDataRedaction === 'true' || adsDataRedaction === true);
+}
+
 gtagSet('developer_id.dNjE1OT', true);
 
 // ============================================
@@ -241,6 +322,12 @@ const consentCallback = function(consentData) {
   };
 
   updateConsentState(consentUpdate);
+
+  // Update ads_data_redaction in dynamic mode
+  if (adsDataRedaction === 'dynamic') {
+    gtagSet('ads_data_redaction', !consentData.ad_storage);
+  }
+
   debugLog('Consent updated');
 };
 
@@ -528,7 +615,10 @@ scenarios:
       clientId: 'test_123',
       defaultConsent: 'denied',
       enableTcf: true,
-      waitForUpdate: 500
+      waitForUpdate: 500,
+      globalFallback: 'granted',
+      urlPassthrough: false,
+      adsDataRedaction: 'true'
     };
 
     runCode(mockData);
@@ -542,7 +632,10 @@ scenarios:
       clientId: 'test_123',
       defaultConsent: 'granted',
       enableTcf: false,
-      waitForUpdate: 300
+      waitForUpdate: 300,
+      globalFallback: 'granted',
+      urlPassthrough: false,
+      adsDataRedaction: 'true'
     };
 
     runCode(mockData);
@@ -554,7 +647,10 @@ scenarios:
     const mockData = {
       clientId: 'test_123',
       defaultConsent: 'denied',
-      waitForUpdate: 500
+      waitForUpdate: 500,
+      globalFallback: 'granted',
+      urlPassthrough: false,
+      adsDataRedaction: 'true'
     };
 
     runCode(mockData);
@@ -566,7 +662,10 @@ scenarios:
     const mockData = {
       clientId: 'test_123',
       defaultConsent: 'denied',
-      waitForUpdate: 500
+      waitForUpdate: 500,
+      globalFallback: 'granted',
+      urlPassthrough: false,
+      adsDataRedaction: 'true'
     };
 
     mock('injectScript', function(url, onSuccess, onFailure, cacheToken) {
@@ -582,7 +681,10 @@ scenarios:
     const mockData = {
       clientId: 'test_123',
       defaultConsent: 'denied',
-      waitForUpdate: 500
+      waitForUpdate: 500,
+      globalFallback: 'granted',
+      urlPassthrough: false,
+      adsDataRedaction: 'true'
     };
 
     mock('injectScript', function(url, onSuccess, onFailure, cacheToken) {
@@ -598,7 +700,10 @@ scenarios:
     const mockData = {
       clientId: 'test_123',
       defaultConsent: 'denied',
-      waitForUpdate: 500
+      waitForUpdate: 500,
+      globalFallback: 'granted',
+      urlPassthrough: false,
+      adsDataRedaction: 'true'
     };
 
     let capturedCallback;
@@ -625,13 +730,32 @@ scenarios:
 
     assertApi('updateConsentState').wasCalled();
 
-- name: Test region parsing
+- name: Test region parsing with global fallback
   code: |-
     const mockData = {
       clientId: 'test_123',
       defaultConsent: 'denied',
       region: 'DE, FR, IT',
-      waitForUpdate: 500
+      globalFallback: 'granted',
+      waitForUpdate: 500,
+      urlPassthrough: false,
+      adsDataRedaction: 'true'
+    };
+
+    runCode(mockData);
+
+    assertApi('setDefaultConsentState').wasCalled();
+
+- name: Test no global fallback when region is empty
+  code: |-
+    const mockData = {
+      clientId: 'test_123',
+      defaultConsent: 'denied',
+      region: '',
+      globalFallback: 'granted',
+      waitForUpdate: 500,
+      urlPassthrough: false,
+      adsDataRedaction: 'true'
     };
 
     runCode(mockData);
@@ -643,7 +767,10 @@ scenarios:
     const mockData = {
       clientId: 'test_123',
       defaultConsent: 'denied',
-      waitForUpdate: 500
+      waitForUpdate: 500,
+      globalFallback: 'granted',
+      urlPassthrough: false,
+      adsDataRedaction: 'true'
     };
 
     let capturedCallback;
@@ -669,19 +796,115 @@ scenarios:
     const mockData = {
       clientId: 'test_123',
       defaultConsent: 'denied',
-      waitForUpdate: 500
+      waitForUpdate: 500,
+      globalFallback: 'granted',
+      urlPassthrough: false,
+      adsDataRedaction: 'true'
     };
 
     runCode(mockData);
 
     assertApi('gtagSet').wasCalledWith('developer_id.dNjE1OT', true);
 
+- name: Test url_passthrough respects configuration when disabled
+  code: |-
+    const mockData = {
+      clientId: 'test_123',
+      defaultConsent: 'denied',
+      waitForUpdate: 500,
+      globalFallback: 'granted',
+      urlPassthrough: false,
+      adsDataRedaction: 'true'
+    };
+
+    runCode(mockData);
+
+    assertApi('gtagSet').wasCalledWith('url_passthrough', false);
+
+- name: Test url_passthrough respects configuration when enabled
+  code: |-
+    const mockData = {
+      clientId: 'test_123',
+      defaultConsent: 'denied',
+      waitForUpdate: 500,
+      globalFallback: 'granted',
+      urlPassthrough: true,
+      adsDataRedaction: 'true'
+    };
+
+    runCode(mockData);
+
+    assertApi('gtagSet').wasCalledWith('url_passthrough', true);
+
+- name: Test ads_data_redaction true mode
+  code: |-
+    const mockData = {
+      clientId: 'test_123',
+      defaultConsent: 'denied',
+      waitForUpdate: 500,
+      globalFallback: 'granted',
+      urlPassthrough: false,
+      adsDataRedaction: 'true'
+    };
+
+    runCode(mockData);
+
+    assertApi('gtagSet').wasCalledWith('ads_data_redaction', true);
+
+- name: Test ads_data_redaction false mode
+  code: |-
+    const mockData = {
+      clientId: 'test_123',
+      defaultConsent: 'denied',
+      waitForUpdate: 500,
+      globalFallback: 'granted',
+      urlPassthrough: false,
+      adsDataRedaction: 'false'
+    };
+
+    runCode(mockData);
+
+    assertApi('gtagSet').wasCalledWith('ads_data_redaction', false);
+
+- name: Test ads_data_redaction dynamic mode with denied default
+  code: |-
+    const mockData = {
+      clientId: 'test_123',
+      defaultConsent: 'denied',
+      waitForUpdate: 500,
+      globalFallback: 'granted',
+      urlPassthrough: false,
+      adsDataRedaction: 'dynamic'
+    };
+
+    runCode(mockData);
+
+    assertApi('gtagSet').wasCalledWith('ads_data_redaction', true);
+
+- name: Test ads_data_redaction dynamic mode with granted default
+  code: |-
+    const mockData = {
+      clientId: 'test_123',
+      defaultConsent: 'granted',
+      waitForUpdate: 500,
+      globalFallback: 'denied',
+      urlPassthrough: false,
+      adsDataRedaction: 'dynamic'
+    };
+
+    runCode(mockData);
+
+    assertApi('gtagSet').wasCalledWith('ads_data_redaction', false);
+
 - name: Test load order detection reads dataLayer
   code: |-
     const mockData = {
       clientId: 'test_123',
       defaultConsent: 'denied',
-      waitForUpdate: 500
+      waitForUpdate: 500,
+      globalFallback: 'granted',
+      urlPassthrough: false,
+      adsDataRedaction: 'true'
     };
 
     mock('getContainerVersion', function() {
@@ -714,6 +937,21 @@ Script URL: https://app.consently.net/consently.js?id={CLIENT_ID}
 
 TRIGGER: Must use "Consent Initialization - All Pages"
 
+PARAMETERS:
+- Client ID: Your Consently dashboard client ID
+- Default consent state: denied/granted for specified regions (or global if no region)
+- Region: ISO 3166-2 codes (e.g., DE, FR, US-CA). Leave empty for global.
+- Consent for other regions: granted/denied fallback for visitors outside specified regions
+- Enable IAB TCF 2.2: Google tags auto-infer ad consent from TC String
+- Enable URL passthrough: Pass ad click IDs via URL params when cookies denied
+- Ads data redaction: true/false/dynamic — redact ad identifiers when ad consent denied
+- Wait for update (ms): Time for CMP to load before tags fire with defaults
+
+REGION EXAMPLES:
+- GDPR: region="DE,FR,IT", default=denied, fallback=granted
+- CCPA: region="US-CA,US-VA,US-CO,US-CT,US-UT", default=granted, fallback=denied
+- Global deny: region=(empty), default=denied
+
 CALLBACK FORMAT (from CMP):
 {
   ad_storage: boolean,
@@ -723,8 +961,11 @@ CALLBACK FORMAT (from CMP):
   personalization_storage: boolean
 }
 
-TCF 2.2: When enabled, Google auto-infers ad consent from TC String.
-analytics_storage must still be sent separately.
+CONSENT FLOW:
+1. Template sets default consent (with region + global fallback)
+2. consently.js loads and reads saved consent cookie
+3. consently.js calls window.__consentlyCallback with real consent
+4. Template calls updateConsentState with actual user choices
 
 DEBUG MODE:
 - Automatically enabled in GTM Preview mode
