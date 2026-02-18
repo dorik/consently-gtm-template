@@ -10,11 +10,11 @@ ___INFO___
 
 {
   "type": "TAG",
-  "id": "cvt_temp_public_id",
+  "id": "cosently",
   "version": 1,
   "securityGroups": [],
   "displayName": "Consently CMP",
-  "description": "Consently Consent Management Platform integration for Google Consent Mode v2. Enables GDPR, CCPA, and ePrivacy compliant consent collection with full IAB TCF 2.2 support.",
+  "description": "Consently Consent Management Platform integration for Google consent mode. Enables GDPR, CCPA, and ePrivacy compliant consent collection with full IAB TCF 2.2 support.",
   "categories": [
     "TAG_MANAGEMENT",
     "PERSONALIZATION"
@@ -157,7 +157,7 @@ ___TEMPLATE_PARAMETERS___
 ___SANDBOXED_JS_FOR_WEB_TEMPLATE___
 
 /**
- * Consently CMP - Google Consent Mode v2 Template
+ * Consently CMP - Google Consent Mode Template
  * Version: 1.0.0
  *
  * TRIGGER: Must use "Consent Initialization - All Pages"
@@ -653,9 +653,22 @@ scenarios:
       adsDataRedaction: 'true'
     };
 
+    let callbackKey;
+    let callbackFn;
+    let callbackOverwrite;
+    mock('setInWindow', function(key, fn, overwrite) {
+      if (key === '__consentlyCallback') {
+        callbackKey = key;
+        callbackFn = fn;
+        callbackOverwrite = overwrite;
+      }
+    });
+
     runCode(mockData);
 
-    assertApi('setInWindow').wasCalledWith('__consentlyCallback', anyFunction, true);
+    assertThat(callbackKey).isEqualTo('__consentlyCallback');
+    assertThat(typeof callbackFn).isEqualTo('function');
+    assertThat(callbackOverwrite).isEqualTo(true);
 
 - name: Test script injection success
   code: |-

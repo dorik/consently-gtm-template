@@ -19,7 +19,7 @@ versions:
     changeNotes: |
       Initial release (v1.0.0)
 
-      - Google Consent Mode v2 with all 7 consent signals
+      - Google consent mode with all 7 consent signals
       - IAB TCF 2.2 support via gtag_enable_tcf_support
       - Region-specific default consent with global fallback
       - Configurable URL passthrough for conversion tracking

@@ -1,10 +1,10 @@
 # Consently CMP - Google Tag Manager Template
 
-Google Tag Manager template for [Consently](https://consently.net) Consent Management Platform with Google Consent Mode v2 and IAB TCF 2.2 support.
+Google Tag Manager template for [Consently](https://consently.net) Consent Management Platform with Google consent mode and IAB TCF 2.2 support.
 
 ## Features
 
-- **Google Consent Mode v2** - All 7 consent signals supported
+- **Google Consent Mode** - All 7 consent signals supported
 - **IAB TCF 2.2** - Automatic consent inference from TC String
 - **Region targeting** - Apply default consent to specific regions
 - **Privacy safeguards** - URL passthrough and ads data redaction
