@@ -15,12 +15,13 @@
 homepage: 'https://consently.net'
 documentation: 'https://help.consently.net/gtm-template'
 versions:
-  - sha: df7c4722aae39df559ebc4e26f94bd97e52833dd
+  - sha: ab502cac31a0eb597e638cb99c5d9d2496fc6608
     changeNotes: |
       Initial release (v1.0.0)
 
       - Google Consent Mode v2 with all 7 consent signals
       - IAB TCF 2.2 support via gtag_enable_tcf_support
-      - Region-specific default consent
-      - URL passthrough for conversion tracking
-      - Ads data redaction when consent denied
+      - Region-specific default consent with global fallback
+      - Configurable URL passthrough for conversion tracking
+      - Configurable ads data redaction (true/false/dynamic)
+      - New tests for all configuration scenarios
