@@ -13,7 +13,7 @@
 # limitations under the License.
 
 homepage: 'https://consently.net'
-documentation: 'https://help.consently.net/gtm-template'
+documentation: 'https://help.consently.net/en/google-tag-manager-installation'
 versions:
   - sha: c398f36bb14ce5bb310cd6d1a53c160853bb0da2
     changeNotes: |

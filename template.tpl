@@ -945,7 +945,7 @@ CONSENTLY CMP - GOOGLE TAG MANAGER TEMPLATE
 
 Version: 1.0.0
 Author: Consently (https://consently.net)
-Documentation: https://help.consently.net/gtm-template
+Documentation: https://help.consently.net/en/google-tag-manager-installation
 Script URL: https://app.consently.net/consently.js?id={CLIENT_ID}
 
 TRIGGER: Must use "Consent Initialization - All Pages"
